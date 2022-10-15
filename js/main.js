@@ -17,7 +17,6 @@ class mainScreen extends Phaser.Scene {
 
   /** Load assets into RAM */
   preload() {
-    this.load.image('sky', 'assets/sky.png');
     this.load.image('bandera', 'assets/bandera348x192.png');
     this.load.image('escudo', 'assets/escudo240x338.png');
   
@@ -27,18 +26,14 @@ class mainScreen extends Phaser.Scene {
 
   /** Create and initialize scene components */
   create() {
-    //var txt1; Hector Jaime Trejos
 
     //  A simple background for our game
-    //this.add.image(400, 300, 'sky');
     cityMap = this.add.image(400, 300, '2qbradasmap').setScale(0.2).setAlpha(0.0);
     flag= this.add.image(100, -50, 'bandera').setScale(0.5).setAlpha(0.2);
     emblem= this.add.image(730, -200, 'escudo').setScale(0.5).setAlpha(0.2);
 
-    //txt1= this.add.text(400, 300, 'hola mundo', { color: '#00ff00', align: 'center' }).setOrigin(0.5);
-    //txt1.setScale(2.0);
-
     var add = this.add;
+    var tweens = this.tweens
     WebFont.load({
         google: {
           families: ['Raleway:500']
@@ -48,18 +43,40 @@ class mainScreen extends Phaser.Scene {
         },
         active: function ()
         {
-          slogan= add.text(400, 300, 'NombreCampaña', 
+          slogan= add.text(400, 300, '\"LemaCampaña\"', 
             { fontFamily: 'Raleway', fontSize: 70, color: '#373c3f' }).setOrigin(0.5)
             .setShadow(1, 1, "#fae9e9", 2, false, true).setAlpha(0.0);
-            
+
+          var tween1 = tweens.add({
+            targets: slogan,
+            alpha: 1.0,
+            duration: 2000,
+            ease: 'Sine.Out',
+            loop: 0
+          })
+        
           candidateName= add.text(400, 300, 'Hector Jaime Trejos', 
             {fontFamily: 'Raleway', fontSize: 72, color: '#373c3f'}).setOrigin(0.5).setAlpha(0.0);
 
-            //add.text(150, 350, 'Habitantes: 225Mil.', 
-            //{ fontFamily: 'Caroni', fontSize: 64, color: '#377ef2' });
+          cityInfoGeneral1=  add.text(50, 140, '70.58km2', 
+            { fontFamily: 'Caroni', fontSize: 64, color: '#1490d8' }).setAlpha(0.0);
+          cityInfoGeneral2=  add.text(50, 210, '225k habitantes', 
+            { fontFamily: 'Caroni', fontSize: 64, color: '#1490d8' }).setAlpha(0.0);
+          cityInfoGeneral3=  add.text(50, 280, '95% urbana', 
+            { fontFamily: 'Caroni', fontSize: 64, color: '#1490d8' }).setAlpha(0.0);
+          cityInfoGeneral4=  add.text(50, 350, '78% nació en otro municipio', 
+            { fontFamily: 'Caroni', fontSize: 64, color: '#1490d8' }).setAlpha(0.0);
+
+          cityInfoGeneral5=  add.text(545, 100, '12 comunas', 
+            { fontFamily: 'Caroni', fontSize: 54, color: '#1490d8' }).setAlpha(0.0);
+          cityInfoGeneral6=  add.text(545, 160, '273 barrios', 
+            { fontFamily: 'Caroni', fontSize: 54, color: '#1490d8' }).setAlpha(0.0);
+          cityInfoGeneral7=  add.text(545, 220, '32 veredas', 
+            { fontFamily: 'Caroni', fontSize: 54, color: '#1490d8' }).setAlpha(0.0);
+          cityInfoGeneral8=  add.text(460, 280, '2 corregimientos', 
+            { fontFamily: 'Caroni', fontSize: 54, color: '#1490d8' }).setAlpha(0.0);
         }
     });
-
 
     this.input.on('pointerup', function () {
       if (flag.visible) {
@@ -71,27 +88,20 @@ class mainScreen extends Phaser.Scene {
       }
     });
 
-
-  /*
-    var tween1 = this.tweens.addCounter({
-        from: 0,
-        to: 360,
-        duration: 5000,
-        repeat: -1,
-        onUpdate: function (tween)
-        {
-            //  tween.getValue = range between 0 and 360
-
-            tiger.setAngle(tween.getValue());
-        }
+    var scene = this.scene;
+    this.input.keyboard.on('keydown_SPACE', function () {
+      if (scene.isActive()) {
+        scene.pause();
+      } else {
+        scene.resume();
+      }
     });
 
-  */  
-    //game.add.tween(txt1).to( { alpha: 0 }, 2000, "Linear", true);
-
-    showSlogan = this.time.addEvent({ delay: 200, callback: onKeyFrame0, callbackScope: this, repeat: 10 });
-    showName = this.time.addEvent({ delay: 3000, callback: onKeyFrame3, callbackScope: this, repeat: 0 });
-    showCityMap = this.time.addEvent({ delay: 5000, callback: onKeyFrame5, callbackScope: this, repeat: 0 });
+    var showName = this.time.addEvent({ delay: 3000, callback: onKeyFrame3, callbackScope: this, repeat: 0 });
+    var showCityMap = this.time.addEvent({ delay: 5000, callback: onKeyFrame5, callbackScope: this, repeat: 0 });
+    var showCityInfo1 = this.time.addEvent({ delay: 6000, callback: onKeyFrame6, callbackScope: this, repeat: 0 });
+    var showCityInfo2 = this.time.addEvent({ delay: 8000, callback: onKeyFrame8, callbackScope: this, repeat: 0 });
+    var hideCityInfos = this.time.addEvent({ delay: 11000, callback: onKeyFrame11, callbackScope: this, repeat: 0 });
 
   }
   
@@ -101,13 +111,10 @@ class mainScreen extends Phaser.Scene {
   }
 }
 
-function onKeyFrame0 () {
-  slogan.alpha += 0.1;
-}
-
 function onKeyFrame3 () {
   var tween1= this.tweens.add({
     targets: slogan,
+    x: 290,
     y: 50,
     duration: 2000,
     ease: 'Power2',
@@ -117,7 +124,7 @@ function onKeyFrame3 () {
   var tween2 = this.tweens.add({
     targets: flag,
     y: 510,
-    duration: 2000,
+    duration: 4000,
     ease: 'Back.easeOut',
     loop: 0
   });
@@ -125,14 +132,14 @@ function onKeyFrame3 () {
   var tween3 = this.tweens.add({
     targets: emblem,
     y: 510,
-    duration: 2000,
+    duration: 8000,
     ease: 'Back.easeOut',
     loop: 0
   });
 
   var tween4 = this.tweens.add({
     targets: candidateName,
-    alpha: 1,
+    alpha: 1.0,
     duration: 2000,
     ease: 'Sine.Out',
     loop: 0
@@ -143,7 +150,8 @@ function onKeyFrame3 () {
 function onKeyFrame5 () {
   var tween1= this.tweens.add({
     targets: candidateName,
-    y: 570,
+    x: 430,
+    y: 550,
     scaleX: 0.6,
     scaleY: 0.6,
     duration: 3000,
@@ -158,6 +166,107 @@ function onKeyFrame5 () {
     ease: 'Sine.Out',
     loop: 0
   })
+
+}
+
+function onKeyFrame6 () {
+  var timeline = this.tweens.createTimeline();
+
+  timeline.add({
+    targets: cityInfoGeneral1,
+    alpha: 1.0,
+    duration: 500,
+    ease: 'Sine.easeIn',
+    loop: 0
+  });
+
+
+  timeline.add({
+    targets: cityInfoGeneral2,
+    alpha: 1.0,
+    duration: 500,
+    ease: 'Sine.easeIn',
+    loop: 0
+  });
+
+
+  timeline.add({
+    targets: cityInfoGeneral3,
+    alpha: 1.0,
+    duration: 500,
+    ease: 'Sine.easeIn',
+    loop: 0
+  });
+
+
+  timeline.add({
+    targets: cityInfoGeneral4,
+    alpha: 1.0,
+    duration: 500,
+    ease: 'Sine.easeIn',
+    loop: 0
+  });
+
+  timeline.play();
+}
+
+function onKeyFrame8 () {
+  var timeline = this.tweens.createTimeline();
+
+  timeline.add({
+    targets: cityInfoGeneral5,
+    alpha: 1.0,
+    duration: 500,
+    ease: 'Sine.easeIn',
+    loop: 0
+  });
+
+
+  timeline.add({
+    targets: cityInfoGeneral6,
+    alpha: 1.0,
+    duration: 500,
+    ease: 'Sine.easeIn',
+    loop: 0
+  });
+
+
+  timeline.add({
+    targets: cityInfoGeneral7,
+    alpha: 1.0,
+    duration: 500,
+    ease: 'Sine.easeIn',
+    loop: 0
+  });
+
+
+  timeline.add({
+    targets: cityInfoGeneral8,
+    alpha: 1.0,
+    duration: 500,
+    ease: 'Sine.easeIn',
+    loop: 0
+  });
+
+  timeline.play();
+}
+
+function onKeyFrame11 () {
+  var tween1= this.tweens.add({
+    targets: [cityInfoGeneral1, cityInfoGeneral2, cityInfoGeneral3, cityInfoGeneral4],
+    x: -800,
+    duration: 3000,
+    ease: 'Back.easeOut',
+    loop: 0
+  });
+
+  var tween1= this.tweens.add({
+    targets: [cityInfoGeneral5, cityInfoGeneral6, cityInfoGeneral7, cityInfoGeneral8],
+    x: 1600,
+    duration: 3000,
+    ease: 'Back.easeOut',
+    loop: 0
+  });
 
 }
 
@@ -184,9 +293,7 @@ var flag;
 var emblem;
 var candidateName;
 var cityMap;
-
-var showSlogan;
-var showName;
-var showCityMap;
+var cityInfoGeneral1, cityInfoGeneral2, cityInfoGeneral3, cityInfoGeneral4;
+var cityInfoGeneral5, cityInfoGeneral6, cityInfoGeneral7, cityInfoGeneral8;
 
 var game = new Phaser.Game(config);
