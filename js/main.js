@@ -84,13 +84,13 @@ class mainScreen extends Phaser.Scene {
           candidateName= add.text(centerX, centerY, 'Hector Jaime Trejos', 
             {fontFamily: 'Raleway', fontSize: 72, color: '#373c3f'}).setOrigin(0.5).setAlpha(0.0);
 
-          cityInfoGeneral1=  add.text(50, 140, '70.58km2', 
+          cityInfoGeneral1=  add.text(50, 140, '70km2', 
           { fontFamily: 'Caroni', fontSize: 64, color: '#1490d8' }).setAlpha(0.0);
           cityInfoGeneral2=  add.text(50, 210, '225k habitantes', 
           { fontFamily: 'Caroni', fontSize: 64, color: '#1490d8' }).setAlpha(0.0);
           cityInfoGeneral3=  add.text(50, 280, '95% urbana', 
           { fontFamily: 'Caroni', fontSize: 64, color: '#1490d8' }).setAlpha(0.0);
-          cityInfoGeneral4=  add.text(50, 350, '78% nació en otro municipio', 
+          cityInfoGeneral4=  add.text(50, 350, '80% nació en otro municipio', 
           { fontFamily: 'Caroni', fontSize: 64, color: '#1490d8' }).setAlpha(0.0);
 
           cityInfoGeneral5=  add.text(545, 100, '12 comunas', 
@@ -112,11 +112,11 @@ class mainScreen extends Phaser.Scene {
           { fontFamily: 'Caroni', fontSize: 64, color: '#1490d8' }).setAlpha(0.0);
           cityInfoDensity3= add.text(180, 400, '55 viviendas/ha', 
           { fontFamily: 'Caroni', fontSize: 64, color: '#1490d8' }).setAlpha(0.0);
-          cityInfoDensity4= add.text(-400, 270, '3500km vías principales', 
+          cityInfoDensity4= add.text(-500, 270, '3500km vías principales', 
           { fontFamily: 'Caroni', fontSize: 54, color: '#1490d8' }).setAlpha(0.0);
-          cityInfoDensity5= add.text(-400, 270, '2700 periféricas', 
+          cityInfoDensity5= add.text(-500, 270, '2700 periféricas', 
           { fontFamily: 'Caroni', fontSize: 54, color: '#1490d8' }).setAlpha(0.0);
-          cityInfoDensity6= add.text(-400, 270, '365km sin pavimentar', 
+          cityInfoDensity6= add.text(-500, 270, '365km sin pavimentar', 
           { fontFamily: 'Caroni', fontSize: 54, color: '#1490d8' }).setAlpha(0.0);
           
           cityInfoEconomi1= add.text(60, 140, 'PIB: 3Billones', 
@@ -135,11 +135,11 @@ class mainScreen extends Phaser.Scene {
           cityInfoCrimes1= add.text(centerX, 450, 'Delitos mayor impacto:', 
           { fontFamily: 'Caroni', fontSize: 60, color: '#1490d8', fontStyle: 'bold' }).setOrigin(0.5).setAlpha(0.0);
           cityInfoCrimes2= add.text(centerX, 450, 'hurto (personas, residencias, comercio)', 
-          { fontFamily: 'Caroni', fontSize: 40, color: '#1490d8', fontStyle: 'bold' }).setOrigin(0.5).setAlpha(0.0);
+          { fontFamily: 'Caroni', fontSize: 40, color: '#1490d8' }).setOrigin(0.5).setAlpha(0.0);
           cityInfoCrimes3= add.text(centerX, 450, 'violencia intrafamiliar', 
-          { fontFamily: 'Caroni', fontSize: 40, color: '#1490d8', fontStyle: 'bold' }).setOrigin(0.5).setAlpha(0.0);
+          { fontFamily: 'Caroni', fontSize: 40, color: '#1490d8' }).setOrigin(0.5).setAlpha(0.0);
           cityInfoCrimes4= add.text(centerX, 450, 'homicidios', 
-          { fontFamily: 'Caroni', fontSize: 40, color: '#1490d8', fontStyle: 'bold' }).setOrigin(0.5).setAlpha(0.0);
+          { fontFamily: 'Caroni', fontSize: 40, color: '#1490d8' }).setOrigin(0.5).setAlpha(0.0);
         }
     });
 
@@ -681,12 +681,11 @@ function onKeyFrame32 () {
 }
 
 function onKeyFrame35 () {
-  cityMap.destroy();
   cityMap = this.add.image(centerX, centerY, '2qbradasmapn').setScale(0.2).setAlpha(0.0);
-
+  
   var tween1 = this.tweens.add({
     targets: cityMap,
-    alpha: 1.0,
+    alpha: 0.7,
     duration: 2000,
     ease: 'Sine.Out',
     loop: 0
