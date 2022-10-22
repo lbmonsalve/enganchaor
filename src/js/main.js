@@ -46,6 +46,10 @@ class mainScreen extends Phaser.Scene {
 
   /** Create and initialize scene components */
   create() {
+    // resize game canvas:
+    window.addEventListener('resize', resize);
+    resize();
+
     // center xy:
     centerX = this.canvas.width/ 2;
     centerY = this.canvas.height/ 2;
@@ -713,6 +717,18 @@ var config = {
     },
     scene: [mainScreen, resumeScreen]
 };
+
+function resize() {
+  var canvas = game.canvas, width = window.innerWidth, height = window.innerHeight;
+  var wratio = width / height, ratio = canvas.width / canvas.height;
+  if (wratio < ratio) {
+      canvas.style.width = width + "px";
+      canvas.style.height = (width / ratio) + "px";
+  } else {
+      canvas.style.width = (height * ratio) + "px";
+      canvas.style.height = height + "px";
+  }
+}
 
 var centerX, centerY;
 var slogan;
